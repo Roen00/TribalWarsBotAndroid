@@ -1,0 +1,69 @@
+# To enable ProGuard in your project, edit project.properties
+# to define the proguard.config property as described in that file.
+#
+# Add project specific ProGuard rules here.
+# By default, the flags in this file are appended to flags specified
+# in ${sdk.dir}/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the ProGuard
+# include property in project.properties.
+#
+# For more details, see
+#   http://developer.android.com/guide/developing/tools/proguard.html
+
+# Add any project specific keep options here:
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class name to the JavaScript interface
+# class:
+#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+#   public *;
+#}
+-dontwarn **$$anonfun$*
+-dontwarn scala.beans.ScalaBeanInfo
+-dontwarn scala.collection.generic.GenTraversableFactory
+-dontwarn scala.collection.immutable.RedBlack$Empty
+-dontwarn scala.concurrent.forkjoin.**
+-dontwarn scala.reflect.**
+-dontwarn scala.sys.process.**
+-dontwarn scala.swing.**
+-dontwarn scala.concurrent.**
+-dontwarn scala.tools.**,plugintemplate.**
+
+-dontwarn org.apache.ivy.**
+-dontwarn jline.console.ConsoleReader
+-dontwarn org.fusesource.jansi.**
+
+-dontnote org.xml.sax.EntityResolver
+
+# fixes an issue with async/await (https://issues.scala-lang.org/browse/SI-5397)
+-keep class scala.collection.SeqLike {
+    public protected *;
+}
+
+## Fixes ==> Warning: ... can't find referenced class sun.misc.Unsafe
+-dontwarn sun.misc.Unsafe
+
+-dontobfuscate
+-dontoptimize
+-dontpreverify
+
+-dontskipnonpubliclibraryclasses
+-dontskipnonpubliclibraryclassmembers
+
+-keepattributes Signature
+-dontwarn scala.collection.**
+
+#scala.Enumeration accesses a field 'MODULE$' dynamically
+-dontnote scala.Enumeration
+
+#(org.xml.sax.EntityResolver)Class.forName(variable).newInstance()
+-dontnote org.xml.sax.EntityResolver
+
+#(org.apache.james.mime4j.storage.StorageProvider)Class.forName(variable).newInstance()
+-dontnote org.apache.james.mime4j.storage.DefaultStorageProvider
+
+-keepattributes Exceptions,InnerClasses,Signature,Deprecated, SourceFile,LineNumberTable,Annotation,EnclosingMethod
+
+-keep class * extends android.app.Application
+
+
